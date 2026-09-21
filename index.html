@@ -3,21 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mira — Análise de Forma no Arco e Flecha</title>
+<title>Postura no Tiro — PointIAchery</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
   :root{
-    --bg: #ffffff;
-    --surface: #f6f7f9;
-    --surface-2: #edeff2;
-    --line: #e2e5ea;
-    --gold: #c99a3b;
-    --gold-dim: #b8863f;
-    --cyan: #0e9c8c;
-    --amber: #c17a15;
-    --red: #d64545;
-    --text: #14181f;
+    --brand: #3358f4;
+    --brand-dim: #2445c9;
+    --bg: #f5f6fa;
+    --surface: #ffffff;
+    --surface-2: #eef0f6;
+    --line: #e6e8f0;
+    --cyan: #16a34a;   /* "ok" / bom */
+    --amber: #f2a93b;  /* "warn" / atenção */
+    --red: #dc2626;    /* "bad" / fora do alvo */
+    --gold: var(--brand);      /* mantém o nome da variável usada nos componentes, agora azul */
+    --gold-dim: var(--brand-dim);
+    --text: #101828;
     --muted: #6b7280;
   }
 
@@ -26,100 +28,82 @@
   body{
     background: var(--bg);
     color:var(--text);
-    font-family:'Space Grotesk', sans-serif;
+    font-family:'Inter', sans-serif;
     min-height:100vh;
-    padding: 24px 16px 40px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:0;
   }
 
-  /* ---------- HERO ---------- */
-  .hero{max-width:640px; text-align:center; display:flex; flex-direction:column; align-items:center;}
-  .logo-badge{
-    display:flex; align-items:center; justify-content:center;
-    margin:0 0 10px;
-  }
-  .brand-logo{height:72px; width:auto; display:block;}
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:6px;
-    font-family:'IBM Plex Mono', monospace;
-    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
-    color:var(--gold); border:1px solid var(--gold-dim);
-    padding:3px 10px; border-radius:100px; margin-bottom:18px;
-  }
-  .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
-  h1{
-    font-family:'Archivo Black', sans-serif;
-    font-size:clamp(28px,5vw,44px);
-    line-height:1.05; margin:0 0 12px;
-    letter-spacing:-0.01em;
-  }
-  h1 span{color:var(--cyan);}
-  .sub{color:var(--muted); font-size:15px; line-height:1.5; max-width:480px; margin:0 auto;}
-
-  /* ---------- PHONE ---------- */
-  .phone{
-    width:min(390px, 92vw);
-    background:linear-gradient(180deg,#1b222e,#0b0e14);
-    border-radius:44px;
-    border:1px solid #2a3140;
-    box-shadow: 0 40px 80px -30px rgba(0,0,0,.65), inset 0 0 0 8px #05070a;
-    padding:14px;
-  }
-  .screen{
-    background:#ffffff;
-    border-radius:30px;
-    padding:6px 10px 14px;
-  }
-  .notch-row{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:6px 14px 10px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted);
-  }
-  .topbar{
+  /* ---------- TOP NAV (mesmo padrão do PointIAchery) ---------- */
+  .topnav{
+    background:var(--brand);
+    color:#fff;
     display:flex; align-items:center; justify-content:space-between;
-    padding:2px 6px 14px; border-bottom:1px solid var(--line); margin-bottom:12px;
+    padding:0 24px; height:60px;
+    position:sticky; top:0; z-index:50;
   }
-  .topbar .title{font-weight:600; font-size:15px;}
-  .topbar .title small{display:block; font-family:'IBM Plex Mono',monospace; font-weight:400; font-size:10px; color:var(--muted); letter-spacing:.08em; text-transform:uppercase; margin-top:2px;}
-  .icon-btn{width:30px;height:30px;border-radius:9px;border:1px solid var(--line);background:var(--surface);display:flex;align-items:center;justify-content:center;color:var(--muted);cursor:pointer;}
-  .icon-btn.reset-btn{
-    width:auto; height:auto; padding:6px 10px; gap:4px;
-    font-family:'Space Grotesk',sans-serif; font-size:11.5px; font-weight:600;
-    color:var(--gold); border-color:var(--gold-dim); white-space:nowrap;
+  .topnav-left{display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; white-space:nowrap;}
+  .topnav-logo{width:32px; height:32px; border-radius:50%; object-fit:cover; background:#0b0e14;}
+  .topnav-links{display:flex; align-items:center; gap:26px; font-size:14.5px; font-weight:500; flex-wrap:wrap;}
+  .topnav-links a{color:rgba(255,255,255,.82); text-decoration:none;}
+  .topnav-links a:hover{color:#fff;}
+  .topnav-links a.active{color:#fff; font-weight:700;}
+  .topnav-right{display:flex; align-items:center; gap:18px; white-space:nowrap;}
+  .btn-pill-white{
+    background:#fff; color:var(--brand); border:none; border-radius:999px;
+    padding:8px 18px; font-weight:700; font-size:13.5px; cursor:pointer;
+    font-family:'Inter',sans-serif;
   }
-  .icon-btn.reset-btn:hover{background:rgba(201,154,59,.08); border-color:var(--gold);}
-  .icon-btn:hover{color:var(--text); border-color:#3a4356;}
+  .topnav-profile{color:#fff; text-decoration:none; font-size:14.5px; font-weight:500;}
 
-  .beta-banner{
-    display:flex; align-items:center; gap:8px; font-size:10.5px; color:var(--muted);
-    background:var(--surface-2); border:1px solid var(--line); border-radius:10px;
-    padding:7px 10px; margin:0 4px 12px; line-height:1.4;
+  /* ---------- PAGE ---------- */
+  .page{max-width:1180px; margin:0 auto; padding:28px 24px 60px;}
+  .page-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
+  .page-title{font-size:26px; font-weight:800; margin:0 0 6px; letter-spacing:-0.01em;}
+  .page-sub{display:flex; align-items:center; gap:8px; font-size:12.5px; color:var(--muted); margin:0; max-width:640px; line-height:1.5;}
+  .beta-chip{
+    flex:none; font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:700; letter-spacing:.06em;
+    color:#fff; background:var(--brand); padding:2px 8px; border-radius:5px;
   }
-  .beta-pill{
-    flex:none; font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700; letter-spacing:.06em;
-    color:#1a1305; background:var(--gold); padding:2px 6px; border-radius:5px;
+  .lang-select{
+    font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600;
+    border:1px solid var(--line); background:var(--surface); color:var(--text);
+    border-radius:8px; padding:7px 10px; cursor:pointer;
   }
+
+  /* ---------- LAYOUT ---------- */
+  .layout-grid{display:grid; grid-template-columns:minmax(300px,400px) 1fr; gap:22px; align-items:start;}
+  @media (max-width:880px){ .layout-grid{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:16px;
+    padding:18px; box-shadow:0 1px 2px rgba(16,24,40,.03);
+  }
+  .side-col{display:flex; flex-direction:column; gap:20px;}
+
+  .card-header{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:14px;}
+  .card-title{font-weight:700; font-size:15.5px;}
+  .card-subtitle{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-top:2px;}
+  .reset-link{
+    border:1px solid var(--line); background:var(--surface-2); color:var(--brand);
+    font-weight:600; font-size:12px; border-radius:8px; padding:6px 10px; cursor:pointer;
+    font-family:'Inter',sans-serif; white-space:nowrap;
+  }
+  .reset-link:hover{background:#e3e7ff; border-color:var(--brand);}
 
   /* ---------- STAGE (video + canvas) ---------- */
-  .stage-wrap{position:relative; border-radius:20px; overflow:hidden; background:#000; aspect-ratio: 9/13;}
+  .stage-wrap{position:relative; border-radius:12px; overflow:hidden; background:#0b0e14; aspect-ratio: 9/13;}
   .stage-wrap.empty{display:flex; align-items:center; justify-content:center;}
   video, canvas{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none;}
-  img#photoEl{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; pointer-events:none; background:#000;}
+  img#photoEl{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; pointer-events:none; background:#0b0e14;}
   video.hidden-video, img.hidden-video{opacity:0;}
   canvas{pointer-events:none;}
 
   .empty-state{text-align:center; padding:24px; color:#aab0bb; font-size:13px; line-height:1.6;}
-  .empty-state .target{width:56px;height:56px;margin:0 auto 14px;}
-  .target-logo{height:52px; width:auto; margin:0 auto 14px; display:block; border-radius:10px;}
 
   .link-btn{
     display:block; margin:14px auto 0; background:none; border:none; cursor:pointer;
-    font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:600;
-    color:var(--gold); text-decoration:underline; text-underline-offset:3px;
+    font-family:'Inter',sans-serif; font-size:12px; font-weight:600;
+    color:var(--brand); text-decoration:underline; text-underline-offset:3px;
   }
-  .guide-illustration{width:min(230px,80%); margin:0 auto 14px; display:block; border-radius:12px; border:1px solid #2a3140;}
   .guide-tips{
     list-style:none; margin:0 0 16px; padding:0; text-align:left;
     display:inline-flex; flex-direction:column; gap:8px; max-width:230px;
@@ -127,7 +111,7 @@
   .guide-tips li{display:flex; align-items:flex-start; gap:8px; font-size:11.5px; color:#c7cdd7; line-height:1.4;}
   .guide-tips .dot{flex:none; width:5px;height:5px;border-radius:50%;background:var(--cyan); margin-top:5px;}
 
-  .setup-title{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:15px; color:#f2f3f6; margin-bottom:4px;}
+  .setup-title{font-family:'Inter',sans-serif; font-weight:700; font-size:15px; color:#f2f3f6; margin-bottom:4px;}
   .setup-sub{font-size:11.5px; color:#9aa1ad; line-height:1.5; margin-bottom:18px; max-width:240px; margin-left:auto; margin-right:auto;}
   .setup-group{margin-bottom:16px; text-align:left; display:inline-block; width:100%; max-width:240px;}
   .setup-label{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:#8990a0; margin-bottom:7px;}
@@ -136,13 +120,13 @@
 
   .upload-row{display:flex; gap:8px; margin-top:14px; justify-content:center; flex-wrap:wrap;}
   .btn{
-    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:12.5px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px;
     border-radius:10px; padding:9px 14px; cursor:pointer; border:1px solid var(--line);
-    background:var(--surface); color:var(--text); display:flex; align-items:center; gap:6px;
+    background:var(--surface-2); color:var(--text); display:flex; align-items:center; gap:6px;
   }
-  .btn:hover{border-color:#3a4356; background:var(--surface-2);}
-  .btn.primary{background:var(--gold); color:#1a1305; border-color:var(--gold);}
-  .btn.primary:hover{background:#e0b64d;}
+  .btn:hover{border-color:#c7cdd7; background:#e6e9f2;}
+  .btn.primary{background:var(--brand); color:#fff; border-color:var(--brand);}
+  .btn.primary:hover{background:var(--brand-dim);}
   input[type="file"]{display:none;}
 
   .athlete-tag, .photo-tag{
@@ -152,7 +136,7 @@
     padding:4px 9px; border-radius:7px; border:1px solid rgba(255,255,255,.08);
     color:#f2f3f6; letter-spacing:.02em;
   }
-  .photo-tag{background:rgba(201,154,59,.85); color:#1a1305; border-color:transparent; font-weight:600;}
+  .photo-tag{background:rgba(51,88,244,.85); color:#fff; border-color:transparent; font-weight:600;}
   .flip-cam-btn{
     position:absolute; top:12px; right:12px; z-index:6;
     width:34px; height:34px; border-radius:50%;
@@ -165,10 +149,9 @@
     position:absolute; inset:0; z-index:8; display:flex; align-items:center; justify-content:center;
     flex-direction:column; gap:10px; background:rgba(5,7,11,.65); font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:#c7cdd7;
   }
-  .spinner{width:22px;height:22px;border-radius:50%;border:2px solid #2a3444;border-top-color:var(--cyan);animation:spin .8s linear infinite;}
+  .spinner{width:22px;height:22px;border-radius:50%;border:2px solid #2a3444;border-top-color:var(--brand);animation:spin .8s linear infinite;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
-  /* ---------- angle HUD chips ---------- */
   .angle-chip{
     position:absolute; z-index:6; transform:translate(-50%,-50%);
     font-family:'IBM Plex Mono',monospace; font-size:10.5px; font-weight:500;
@@ -178,29 +161,28 @@
   }
 
   /* ---------- transport ---------- */
-  .transport{padding:14px 4px 4px;}
-  .scrub{width:100%; accent-color:var(--gold); height:4px;}
+  .transport{padding:14px 2px 0;}
+  .scrub{width:100%; accent-color:var(--brand); height:4px;}
   .time-row{display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); margin-top:2px;}
   .play-row{display:flex; align-items:center; justify-content:center; gap:14px; margin-top:8px;}
   .play-toggle{
-    width:42px;height:42px;border-radius:50%;background:var(--gold); border:none; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; color:#1a1305;
+    width:42px;height:42px;border-radius:50%;background:var(--brand); border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; color:#fff;
   }
   .capture-btn{
-    font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:12.5px;
+    font-family:'Inter',sans-serif; font-weight:600; font-size:12.5px;
     border-radius:100px; padding:10px 16px; cursor:pointer;
-    border:1px solid var(--cyan); background:rgba(14,156,140,.08); color:var(--cyan);
+    border:1px solid var(--cyan); background:rgba(22,163,74,.08); color:var(--cyan);
   }
-  .capture-btn:hover{background:rgba(14,156,140,.16);}
+  .capture-btn:hover{background:rgba(22,163,74,.16);}
   .capture-btn.flash{animation:captureFlash .5s ease;}
-  @keyframes captureFlash{0%{background:var(--cyan); color:#062820;} 100%{background:rgba(14,156,140,.08); color:var(--cyan);}}
+  @keyframes captureFlash{0%{background:var(--cyan); color:#062820;} 100%{background:rgba(22,163,74,.08); color:var(--cyan);}}
   .capture-hint{text-align:center; font-size:10.5px; color:var(--muted); margin-top:8px; line-height:1.4;}
 
   /* ---------- controls list ---------- */
-  .controls{margin-top:16px; display:flex; flex-direction:column;}
   .ctl-row{
     display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:12px 4px; border-bottom:1px solid var(--line);
+    padding:12px 0; border-bottom:1px solid var(--line);
   }
   .ctl-row:last-child{border-bottom:none;}
   .ctl-text .label{font-size:13.5px; font-weight:600;}
@@ -216,65 +198,72 @@
   .speed-row{display:flex; gap:6px;}
   .speed-btn{
     font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:6px 10px; border-radius:8px;
-    border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer;
+    border:1px solid var(--line); background:var(--surface-2); color:var(--muted); cursor:pointer;
   }
-  .speed-btn.active{color:var(--cyan); border-color:var(--cyan); background:rgba(87,217,200,.08);}
+  .speed-btn.active{color:var(--brand); border-color:var(--brand); background:#e3e7ff;}
 
   .side-toggle{display:flex; gap:6px;}
   .side-btn{
     font-size:11.5px; padding:6px 10px; border-radius:8px; border:1px solid var(--line);
-    background:var(--surface); color:var(--muted); cursor:pointer; font-family:'Space Grotesk',sans-serif; font-weight:600;
+    background:var(--surface-2); color:var(--muted); cursor:pointer; font-family:'Inter',sans-serif; font-weight:600;
   }
-  .side-btn.active{color:#1a1305; border-color:var(--gold); background:var(--gold);}
+  .side-btn.active{color:#fff; border-color:var(--brand); background:var(--brand);}
   .bow-toggle{width:100%; justify-content:stretch;}
   .bow-toggle .side-btn{flex:1; text-align:center;}
 
-  /* ---------- metrics panel (agora dentro da tela do celular) ---------- */
-  .metrics{
-    background:var(--surface); border:1px solid var(--line);
-    border-radius:16px; padding:16px 14px 6px; margin:14px 0 0;
-  }
+  /* ---------- metrics ---------- */
   .metrics-title{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;}
   .metric{
     display:flex; align-items:center; justify-content:space-between;
-    padding:10px 0; border-bottom:1px solid var(--line);
+    padding:12px 0; border-bottom:1px solid var(--line);
   }
   .metric:last-child{border-bottom:none;}
-  .metric .m-label{font-size:13px; font-weight:600;}
+  .metric .m-label{font-size:13.5px; font-weight:600;}
   .metric .m-sub{font-size:10.5px; color:var(--muted); font-family:'IBM Plex Mono',monospace; margin-top:1px;}
-  .metric .m-val{font-family:'IBM Plex Mono',monospace; font-size:17px; font-weight:600; text-align:right;}
+  .metric .m-val{font-family:'IBM Plex Mono',monospace; font-size:19px; font-weight:700; text-align:right;}
   .m-val small{display:block; font-size:9.5px; font-weight:500; letter-spacing:.06em; text-transform:uppercase; margin-top:1px;}
   .ok{color:var(--cyan);}
   .warn{color:var(--amber);}
   .bad{color:var(--red);}
 
-  .bow-note{font-size:11px; color:var(--gold); background:rgba(212,167,61,.08); border:1px solid var(--gold-dim); border-radius:10px; padding:9px 11px; margin-top:6px 0 10px; line-height:1.5;}
+  .bow-note{font-size:11.5px; color:var(--brand-dim); background:#eef1ff; border:1px solid #c9d2fb; border-radius:10px; padding:10px 12px; margin-top:12px; line-height:1.5;}
 
-  .footnote{text-align:center; font-size:10.5px; color:var(--muted); line-height:1.6; padding:14px 4px 4px;}
-  .footnote a{color:var(--cyan);}
+  .footnote{text-align:center; font-size:10.5px; color:var(--muted); line-height:1.6; padding:26px 4px 0; max-width:920px; margin:0 auto;}
+  .footnote a{color:var(--brand);}
 
-  .phone-header{display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 4px 6px; flex-wrap:wrap;}
-  .phone-header .brand-logo-mini{height:18px; width:auto; border-radius:4px;}
-  .phone-header .eyebrow-mini{
-    display:inline-flex; align-items:center; gap:5px;
-    font-family:'IBM Plex Mono', monospace; font-size:9px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--gold); border:1px solid var(--gold-dim); padding:2px 8px; border-radius:100px;
-  }
-  .phone-header .eyebrow-mini .dot{width:4px;height:4px;border-radius:50%;background:var(--gold);}
-  .lang-select{
-    font-family:'Space Grotesk',sans-serif; font-size:10.5px; font-weight:600;
-    border:1px solid var(--line); background:var(--surface); color:var(--text);
-    border-radius:8px; padding:3px 6px; cursor:pointer; max-width:120px;
+  @media (max-width:520px){
+    .topnav{padding:0 14px;}
+    .topnav-links{display:none;}
+    .page{padding:20px 14px 48px;}
   }
 </style>
 </head>
 <body>
 
-  <div class="phone">
-    <div class="screen">
-    <div class="phone-header">
-      <img class="brand-logo-mini" src="data:image/webp;base64,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" alt="Point IA Archery">
-      <span class="eyebrow-mini"><span class="dot"></span> beta v2.5</span>
+  <header class="topnav">
+    <div class="topnav-left">
+      <img class="topnav-logo" src="data:image/webp;base64,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" alt="PointIAchery">
+      <span>PointIAchery</span>
+    </div>
+    <nav class="topnav-links">
+      <a href="#">Lar</a>
+      <a href="#">Treinamentos</a>
+      <a href="#">Estatísticas</a>
+      <a href="#">Equipamentos</a>
+      <a href="#" class="active">Postura no Tiro</a>
+    </nav>
+    <div class="topnav-right">
+      <button class="btn-pill-white">Novo treinamento</button>
+      <a href="#" class="topnav-profile">Perfil</a>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <h1 class="page-title">Postura no Tiro</h1>
+        <p class="page-sub"><span class="beta-chip">BETA</span> <span id="betaBannerText">Point IA Archery · versão 2.6 — em fase de teste. Métricas ainda sendo ajustadas por treinadores.</span></p>
+      </div>
       <select class="lang-select" id="langSelect" title="Idioma / Language">
         <option value="pt" selected>🇧🇷 Português</option>
         <option value="en">🇬🇧 English</option>
@@ -284,160 +273,160 @@
         <option value="zh">🇹🇼 中文（繁體）</option>
       </select>
     </div>
-    <div class="notch-row">
-      <span id="clock">18:37</span>
-      <span>●●●● 5G 87%</span>
-    </div>
-    <div class="topbar">
-      <button class="icon-btn reset-btn" id="resetBtn" title="Nova análise">‹ <span id="resetBtnLabel">Nova análise</span></button>
-      <div class="title"><span id="appTitle">Postura de Tiro</span><small id="topbarSub">Recurvo · Treino</small></div>
-      <button class="icon-btn" id="exportBtn" title="Exportar">⇩</button>
-    </div>
-    <div class="beta-banner">
-      <span class="beta-pill">BETA</span> <span id="betaBannerText">Point IA Archery · versão 2.5 — em fase de teste. Métricas ainda sendo ajustadas por treinadores.</span>
-    </div>
 
-    <div class="stage-wrap empty" id="stageWrap">
-      <div class="empty-state" id="emptyState">
-        <div id="uploadPrompt">
-          <span id="uploadPromptText">Envie um vídeo do seu tiro, grave da câmera<br>ou envie uma foto do momento</span>
-          <div class="upload-row">
-            <button class="btn primary" id="btnSendVideo">Enviar vídeo</button>
-            <button class="btn" id="camBtn">Usar câmera</button>
-            <button class="btn" id="btnUsePhoto">Usar foto</button>
+    <div class="layout-grid">
+      <section class="card stage-card">
+        <div class="card-header">
+          <div>
+            <div class="card-title" id="appTitle">Postura de Tiro</div>
+            <div class="card-subtitle" id="topbarSub">Recurvo · Treino</div>
           </div>
-          <button class="link-btn" id="showGuideBtn"><span id="showGuideBtnLabel">Ver exemplo de enquadramento</span> ›</button>
+          <button class="reset-link" id="resetBtn">‹ <span id="resetBtnLabel">Nova análise</span></button>
         </div>
 
-        <div id="guideView" style="display:none;">
-          <ul class="guide-tips">
-            <li><span class="dot"></span><span id="guideTip1">De lado, perpendicular ao alvo (perfil completo)</span></li>
-            <li><span class="dot"></span><span id="guideTip2">Corpo inteiro dentro do quadro, dos pés à cabeça</span></li>
-            <li><span class="dot"></span><span id="guideTip3">Boa luz de frente — evite luz forte atrás de você</span></li>
-            <li><span class="dot"></span><span id="guideTip4">Fundo neutro, sem outras pessoas se movendo</span></li>
-          </ul>
-          <button class="btn" id="backFromGuideBtn">‹ <span id="backBtnLabel">Voltar</span></button>
+        <div class="stage-wrap empty" id="stageWrap">
+          <div class="empty-state" id="emptyState">
+            <div id="uploadPrompt">
+              <span id="uploadPromptText">Envie um vídeo do seu tiro, grave da câmera<br>ou envie uma foto do momento</span>
+              <div class="upload-row">
+                <button class="btn primary" id="btnSendVideo">Enviar vídeo</button>
+                <button class="btn" id="camBtn">Usar câmera</button>
+                <button class="btn" id="btnUsePhoto">Usar foto</button>
+              </div>
+              <button class="link-btn" id="showGuideBtn"><span id="showGuideBtnLabel">Ver exemplo de enquadramento</span> ›</button>
+            </div>
+
+            <div id="guideView" style="display:none;">
+              <ul class="guide-tips">
+                <li><span class="dot"></span><span id="guideTip1">De lado, perpendicular ao alvo (perfil completo)</span></li>
+                <li><span class="dot"></span><span id="guideTip2">Corpo inteiro dentro do quadro, dos pés à cabeça</span></li>
+                <li><span class="dot"></span><span id="guideTip3">Boa luz de frente — evite luz forte atrás de você</span></li>
+                <li><span class="dot"></span><span id="guideTip4">Fundo neutro, sem outras pessoas se movendo</span></li>
+              </ul>
+              <button class="btn" id="backFromGuideBtn">‹ <span id="backBtnLabel">Voltar</span></button>
+            </div>
+
+            <div id="setupView" style="display:none;">
+              <div class="setup-title" id="setupTitle">Antes de continuar</div>
+              <div class="setup-sub" id="setupSub">Isso calibra corretamente os ângulos calculados.</div>
+              <div class="setup-group">
+                <div class="setup-label" id="setupBowTypeLabel">Tipo de arco</div>
+                <div class="side-toggle bow-toggle">
+                  <button class="side-btn active" data-bow="recurvo" id="setupBowRecurvo">Recurvo</button>
+                  <button class="side-btn" data-bow="composto" id="setupBowComposto">Composto</button>
+                  <button class="side-btn" data-bow="barebow" id="setupBowBarebow">Barebow</button>
+                </div>
+              </div>
+              <div class="setup-group">
+                <div class="setup-label" id="setupBowSideLabel">Braço do arco</div>
+                <div class="side-toggle">
+                  <button class="side-btn active" data-side="left" id="setupSideLeft">Esquerdo</button>
+                  <button class="side-btn" data-side="right" id="setupSideRight">Direito</button>
+                </div>
+              </div>
+              <div class="upload-row">
+                <button class="btn" id="setupBackBtn">‹ <span id="setupBackLabel">Voltar</span></button>
+                <button class="btn primary" id="setupContinueBtn"><span id="setupContinueLabel">Continuar</span></button>
+              </div>
+            </div>
+          </div>
+          <input type="file" id="fileInput" accept="video/*">
+          <input type="file" id="photoInput" accept="image/*">
+          <video id="video" class="hidden-video" playsinline muted></video>
+          <img id="photoEl" class="hidden-video" alt="">
+          <canvas id="canvas"></canvas>
+          <div class="athlete-tag" id="athleteTag" style="display:none;"><span id="athleteTagText">ATLETA · frame local</span></div>
+          <div class="photo-tag" id="photoTag" style="display:none;"><span id="photoTagText">FOTO · quadro único</span></div>
+          <button class="flip-cam-btn" id="flipCamBtn" style="display:none;" title="Trocar câmera">⟲</button>
+          <div class="badge-loading" id="loadingBadge" style="display:none;">
+            <div class="spinner"></div>
+            <span id="loadingText">Carregando modelo de pose…</span>
+          </div>
         </div>
 
-        <div id="setupView" style="display:none;">
-          <div class="setup-title" id="setupTitle">Antes de continuar</div>
-          <div class="setup-sub" id="setupSub">Isso calibra corretamente os ângulos calculados.</div>
-          <div class="setup-group">
-            <div class="setup-label" id="setupBowTypeLabel">Tipo de arco</div>
+        <div class="transport" id="transport" style="display:none;">
+          <input type="range" class="scrub" id="scrub" min="0" max="100" value="0" step="0.01">
+          <div class="time-row"><span id="curTime">00:00</span><span id="durTime">00:00</span></div>
+          <div class="play-row">
+            <button class="play-toggle" id="playBtn">▶</button>
+            <button class="capture-btn" id="captureBtn"><span id="captureBtnLabel">Capturar quadro</span></button>
+          </div>
+          <div class="capture-hint" id="captureHint">Em velocidade normal, pause (ou capture) pra analisar um instante. Em câmera lenta a análise continua ligada.</div>
+        </div>
+      </section>
+
+      <aside class="side-col">
+        <section class="card metrics-card">
+          <div class="metrics-title" id="metricsTitle">Métricas do quadro atual</div>
+          <div class="metric">
+            <div><div class="m-label" id="metricBowArmLabel">Braço do arco</div><div class="m-sub" id="bowElbowSub">linha ombro→mão vs. horizontal · ideal ≈ 20°–35°</div></div>
+            <div class="m-val ok" id="bowElbowVal">—°<small id="bowElbowState">sem dados corretos</small></div>
+          </div>
+          <div class="metric">
+            <div><div class="m-label" id="metricDrawArmLabel">Braço de tração</div><div class="m-sub" id="drawElbowSub">linha ombro→mão vs. horizontal · ideal ≈ 0°</div></div>
+            <div class="m-val ok" id="drawElbowVal">—°<small id="drawElbowState">sem dados corretos</small></div>
+          </div>
+          <div class="metric">
+            <div><div class="m-label" id="metricShouldersLabel">Alinhamento dos ombros</div><div class="m-sub" id="shoulderSub">ideal ≈ 180° (nivelado)</div></div>
+            <div class="m-val ok" id="shoulderVal">—°<small id="shoulderState">sem dados corretos</small></div>
+          </div>
+          <div class="bow-note" id="bowNote">Cotovelo de tração alinhado com a flecha.</div>
+        </section>
+
+        <section class="card controls-card">
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlShowSkeleton">Mostrar esqueleto</div></div>
+            <label class="switch"><input type="checkbox" id="tglSkeleton" checked><span class="slider"></span></label>
+          </div>
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlSkeletonOnly">Somente esqueleto</div><div class="desc" id="ctlSkeletonOnlyDesc">Oculta o vídeo, mostra só o rastreamento — ideal para comparar tiros.</div></div>
+            <label class="switch"><input type="checkbox" id="tglSkeletonOnly"><span class="slider"></span></label>
+          </div>
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlBlurFace">Desfocar rosto</div><div class="desc" id="ctlBlurFaceDesc">Borra a área do rosto detectada, para privacidade ao compartilhar.</div></div>
+            <label class="switch"><input type="checkbox" id="tglBlurFace"><span class="slider"></span></label>
+          </div>
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlHandTrails">Rastro das mãos</div><div class="desc" id="ctlHandTrailsDesc">Mostra o movimento recente do pulso, útil para avaliar o release.</div></div>
+            <label class="switch"><input type="checkbox" id="tglHandTrails"><span class="slider"></span></label>
+          </div>
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlAngles">Ângulos em tempo real</div><div class="desc" id="ctlAnglesDesc">Exibe os graus de cotovelo e ombro sobre o vídeo.</div></div>
+            <label class="switch"><input type="checkbox" id="tglAngles" checked><span class="slider"></span></label>
+          </div>
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlBowType">Tipo de arco</div><div class="desc" id="ctlBowTypeDesc">Cada modalidade tem uma referência de ângulo diferente na tração e no braço de apoio.</div></div>
+          </div>
+          <div class="ctl-row">
             <div class="side-toggle bow-toggle">
-              <button class="side-btn active" data-bow="recurvo" id="setupBowRecurvo">Recurvo</button>
-              <button class="side-btn" data-bow="composto" id="setupBowComposto">Composto</button>
-              <button class="side-btn" data-bow="barebow" id="setupBowBarebow">Barebow</button>
+              <button class="side-btn active" data-bow="recurvo" id="bowBtnRecurvo">Recurvo</button>
+              <button class="side-btn" data-bow="composto" id="bowBtnComposto">Composto</button>
+              <button class="side-btn" data-bow="barebow" id="bowBtnBarebow">Barebow</button>
             </div>
           </div>
-          <div class="setup-group">
-            <div class="setup-label" id="setupBowSideLabel">Braço do arco</div>
+          <div class="ctl-row">
+            <div class="ctl-text"><div class="label" id="ctlBowSide">Braço do arco</div><div class="desc" id="ctlBowSideDesc">Define qual lado é o braço estendido, para calibrar as métricas.</div></div>
             <div class="side-toggle">
-              <button class="side-btn active" data-side="left" id="setupSideLeft">Esquerdo</button>
-              <button class="side-btn" data-side="right" id="setupSideRight">Direito</button>
+              <button class="side-btn active" data-side="left" id="sideBtnLeft">Esquerdo</button>
+              <button class="side-btn" data-side="right" id="sideBtnRight">Direito</button>
             </div>
           </div>
-          <div class="upload-row">
-            <button class="btn" id="setupBackBtn">‹ <span id="setupBackLabel">Voltar</span></button>
-            <button class="btn primary" id="setupContinueBtn"><span id="setupContinueLabel">Continuar</span></button>
+          <div class="ctl-row" style="border-bottom:none;">
+            <div class="ctl-text"><div class="label" id="ctlSpeed">Velocidade</div></div>
+            <div class="speed-row">
+              <button class="speed-btn" data-speed="0.25">0.25x</button>
+              <button class="speed-btn active" data-speed="0.5">0.5x</button>
+              <button class="speed-btn" data-speed="1">1.0x</button>
+            </div>
           </div>
-        </div>
-      </div>
-      <input type="file" id="fileInput" accept="video/*">
-      <input type="file" id="photoInput" accept="image/*">
-      <video id="video" class="hidden-video" playsinline muted></video>
-      <img id="photoEl" class="hidden-video" alt="">
-      <canvas id="canvas"></canvas>
-      <div class="athlete-tag" id="athleteTag" style="display:none;"><span id="athleteTagText">ATLETA · frame local</span></div>
-      <div class="photo-tag" id="photoTag" style="display:none;"><span id="photoTagText">FOTO · quadro único</span></div>
-      <button class="flip-cam-btn" id="flipCamBtn" style="display:none;" title="Trocar câmera">⟲</button>
-      <div class="badge-loading" id="loadingBadge" style="display:none;">
-        <div class="spinner"></div>
-        <span id="loadingText">Carregando modelo de pose…</span>
-      </div>
+        </section>
+      </aside>
     </div>
 
-    <div class="transport" id="transport" style="display:none;">
-      <input type="range" class="scrub" id="scrub" min="0" max="100" value="0" step="0.01">
-      <div class="time-row"><span id="curTime">00:00</span><span id="durTime">00:00</span></div>
-      <div class="play-row">
-        <button class="play-toggle" id="playBtn">▶</button>
-        <button class="capture-btn" id="captureBtn"><span id="captureBtnLabel">Capturar quadro</span></button>
-      </div>
-      <div class="capture-hint" id="captureHint">Em velocidade normal, pause (ou capture) pra analisar um instante. Em câmera lenta a análise continua ligada.</div>
-    </div>
-
-    <div class="controls">
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlShowSkeleton">Mostrar esqueleto</div></div>
-        <label class="switch"><input type="checkbox" id="tglSkeleton" checked><span class="slider"></span></label>
-      </div>
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlSkeletonOnly">Somente esqueleto</div><div class="desc" id="ctlSkeletonOnlyDesc">Oculta o vídeo, mostra só o rastreamento — ideal para comparar tiros.</div></div>
-        <label class="switch"><input type="checkbox" id="tglSkeletonOnly"><span class="slider"></span></label>
-      </div>
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlBlurFace">Desfocar rosto</div><div class="desc" id="ctlBlurFaceDesc">Borra a área do rosto detectada, para privacidade ao compartilhar.</div></div>
-        <label class="switch"><input type="checkbox" id="tglBlurFace"><span class="slider"></span></label>
-      </div>
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlHandTrails">Rastro das mãos</div><div class="desc" id="ctlHandTrailsDesc">Mostra o movimento recente do pulso, útil para avaliar o release.</div></div>
-        <label class="switch"><input type="checkbox" id="tglHandTrails"><span class="slider"></span></label>
-      </div>
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlAngles">Ângulos em tempo real</div><div class="desc" id="ctlAnglesDesc">Exibe os graus de cotovelo e ombro sobre o vídeo.</div></div>
-        <label class="switch"><input type="checkbox" id="tglAngles" checked><span class="slider"></span></label>
-      </div>
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlBowType">Tipo de arco</div><div class="desc" id="ctlBowTypeDesc">Cada modalidade tem uma referência de ângulo diferente na tração e no braço de apoio.</div></div>
-      </div>
-      <div class="ctl-row">
-        <div class="side-toggle bow-toggle">
-          <button class="side-btn active" data-bow="recurvo" id="bowBtnRecurvo">Recurvo</button>
-          <button class="side-btn" data-bow="composto" id="bowBtnComposto">Composto</button>
-          <button class="side-btn" data-bow="barebow" id="bowBtnBarebow">Barebow</button>
-        </div>
-      </div>
-      <div class="ctl-row">
-        <div class="ctl-text"><div class="label" id="ctlBowSide">Braço do arco</div><div class="desc" id="ctlBowSideDesc">Define qual lado é o braço estendido, para calibrar as métricas.</div></div>
-        <div class="side-toggle">
-          <button class="side-btn active" data-side="left" id="sideBtnLeft">Esquerdo</button>
-          <button class="side-btn" data-side="right" id="sideBtnRight">Direito</button>
-        </div>
-      </div>
-      <div class="ctl-row" style="border-bottom:none;">
-        <div class="ctl-text"><div class="label" id="ctlSpeed">Velocidade</div></div>
-        <div class="speed-row">
-          <button class="speed-btn" data-speed="0.25">0.25x</button>
-          <button class="speed-btn active" data-speed="0.5">0.5x</button>
-          <button class="speed-btn" data-speed="1">1.0x</button>
-        </div>
-      </div>
-    </div>
-
-      <div class="metrics">
-    <div class="metrics-title" id="metricsTitle">Métricas do quadro atual</div>
-    <div class="metric">
-      <div><div class="m-label" id="metricBowArmLabel">Braço do arco</div><div class="m-sub" id="bowElbowSub">linha ombro→mão vs. horizontal · ideal ≈ 20°–35°</div></div>
-      <div class="m-val ok" id="bowElbowVal">—°<small id="bowElbowState">sem dados corretos</small></div>
-    </div>
-    <div class="metric">
-      <div><div class="m-label" id="metricDrawArmLabel">Braço de tração</div><div class="m-sub" id="drawElbowSub">linha ombro→mão vs. horizontal · ideal ≈ 0°</div></div>
-      <div class="m-val ok" id="drawElbowVal">—°<small id="drawElbowState">sem dados corretos</small></div>
-    </div>
-    <div class="metric">
-      <div><div class="m-label" id="metricShouldersLabel">Alinhamento dos ombros</div><div class="m-sub" id="shoulderSub">ideal ≈ 180° (nivelado)</div></div>
-      <div class="m-val ok" id="shoulderVal">—°<small id="shoulderState">sem dados corretos</small></div>
-    </div>
-    <div class="bow-note" id="bowNote">Cotovelo de tração alinhado com a flecha.</div>
-  </div>
-
-  <p class="footnote" id="footnoteText">
-    Point IA Archery · versão 2.5 — <strong>fase de teste</strong>. Protótipo de rastreamento no navegador (MediaPipe Pose, 33 pontos, roda 100% localmente — nenhum vídeo é enviado a um servidor). As faixas de ângulo por recurvo, composto e barebow são referências gerais de forma, não validadas com treinadores; ajuste-as para o estilo e a anatomia de cada atleta antes de usar em treino real.<br><br>
-    <strong>Se o esqueleto não aparecer</strong>, é quase sempre porque o arquivo foi aberto com duplo clique (protocolo <code>file://</code>). Rode um servidor local — por exemplo <code>python3 -m http.server</code> na pasta do arquivo — e abra por <code>http://localhost:8000/mira-arco.html</code>. Os botões de enviar vídeo/foto e o player funcionam de qualquer jeito; só a IA de esqueleto exige esse passo.
-  </p>
-    </div>
-  </div>
+    <p class="footnote" id="footnoteText">
+      Point IA Archery · versão 2.6 — <strong>fase de teste</strong>. Protótipo de rastreamento no navegador (MediaPipe Pose, 33 pontos, roda 100% localmente — nenhum vídeo é enviado a um servidor). As faixas de ângulo por recurvo, composto e barebow são referências gerais de forma, não validadas com treinadores; ajuste-as para o estilo e a anatomia de cada atleta antes de usar em treino real.
+    </p>
+  </main>
 
 <script>
 const video = document.getElementById('video');
@@ -466,7 +455,7 @@ const photoTag = document.getElementById('photoTag');
 const loadingBadge = document.getElementById('loadingBadge');
 const loadingText = document.getElementById('loadingText');
 
-const APP_VERSION = '2.5';
+const APP_VERSION = '2.6';
 
 // ---------- i18n ----------
 const I18N = {
@@ -881,11 +870,6 @@ document.querySelectorAll('.speed-btn').forEach(b=>{
   });
 });
 
-function tickClock(){
-  const d = new Date();
-  document.getElementById('clock').textContent = d.toTimeString().slice(0,5);
-}
-tickClock(); setInterval(tickClock, 30000);
 updateBowProfileUI();
 
 const CONNECTIONS = [
@@ -1271,7 +1255,7 @@ function renderResult(result, sourceEl, w, h){
 
   if(tglSkeleton.checked){
     ctx.lineWidth = 3;
-    ctx.strokeStyle = 'rgba(14,156,140,0.9)';
+    ctx.strokeStyle = 'rgba(51,88,244,0.85)';
     CONNECTIONS.forEach(([a,b])=>{
       if(!pts[a]||!pts[b]) return;
       if(!isVisible(lm[a]) || !isVisible(lm[b])) return; // não desenha ligação de ponto pouco confiável (oclusão)
@@ -1281,7 +1265,7 @@ function renderResult(result, sourceEl, w, h){
       ctx.stroke();
     });
     const jointIdx = [11,12,13,14,15,16,23,24,25,26,27,28];
-    ctx.fillStyle = '#c99a3b';
+    ctx.fillStyle = '#f2a93b';
     jointIdx.forEach(i=>{
       if(!pts[i] || !isVisible(lm[i])) return;
       ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 4.5, 0, 7); ctx.fill();
@@ -1291,8 +1275,8 @@ function renderResult(result, sourceEl, w, h){
   if(tglHandTrails.checked && mode==='video'){
     updateTrail('left', pts[15]);
     updateTrail('right', pts[16]);
-    drawTrail('left', '14,156,140');
-    drawTrail('right', '201,154,59');
+    drawTrail('left', '51,88,244');
+    drawTrail('right', '242,169,59');
   } else {
     handTrail.left = []; handTrail.right = [];
   }
@@ -1434,5 +1418,6 @@ initModel().catch(err=>{
 applyLanguage('pt');
 requestAnimationFrame(drawFrame);
 </script>
+
 </body>
 </html>
